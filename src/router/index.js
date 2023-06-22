@@ -5,7 +5,8 @@ import RegisterView from '../views/RegisterView.vue'
 import { useUserStore } from '../stores/user'
 
 const requireAuth = async (to, from, next) => {
-  const userStore = useUserStore()
+  const userStore = useUserStore() // ojo! definir dentro del método
+  userStore.loadingSession = true
   const user = await userStore.currentUser()
   if (user) {
     //console.log(user)
@@ -14,6 +15,7 @@ const requireAuth = async (to, from, next) => {
     //console.log('no permitido')
     next('/login')
   }
+  userStore.loadingSession = false
 }
 
 
