@@ -15,8 +15,7 @@ const userStore = useUserStore();
   <div v-else>
     <p>Cargando...</p>
   </div>
-  <router-view />
- 
+  <router-view /> 
 </template>
 
 <style scoped>

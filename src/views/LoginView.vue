@@ -16,8 +16,8 @@ import { ref } from "vue";
 const userStore = useUserStore();
 //const router = useRouter();
 
-   const email = ref('sauquillo@gmail.com')
-   const password = ref('12345678')
+   const email = ref('')
+   const password = ref('')
    
    const handleSubmit = ()=>{
       if( !email.value || password.value.length < 6 ){         

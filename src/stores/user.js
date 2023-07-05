@@ -38,6 +38,7 @@ export const useUserStore = defineStore('user',
       }
       catch(err){
         console.log(err)
+        return alert('No estas registrado!')
       } 
       finally{
         this.loadingUser = false
@@ -63,7 +64,7 @@ export const useUserStore = defineStore('user',
             this.userData = null
           }
           resolve(user)
-          console.log(user)
+          // console.log(user)
         }, e => console.log(e));
         unsuscribe()
       })
