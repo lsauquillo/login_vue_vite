@@ -40,6 +40,31 @@ export const useDatabaseStore = defineStore( 'urls', {
         this.loadingDocs = false
       }
     },
+
+    async addUrl(name){
+      try{
+
+        const newDoc = {
+          name: name,
+          short: nanoid(6),
+          user: auth.currentUser.uid
+        }
+
+        const docRef = await addDoc(collection(db, "urls"), newDoc);
+        console.log("Document written with ID: ", docRef.id); 
+         // añadimos a documents este objeto
+         this.documents.push({          
+          ...newDoc,
+          id: docRef.id
+         })   
+      }
+      catch(err){
+        console.log(err)
+      }
+      finally{
+
+      }
+    }
     
   }
 })

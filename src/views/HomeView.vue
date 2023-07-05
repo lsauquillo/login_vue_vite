@@ -27,13 +27,14 @@ import { ref } from "vue";
 
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
+
 databaseStore.getUrls();
 
 const url = ref("");
 
 const handleSubmit = () => {
   databaseStore.addUrl(url.value);
-  console.log("Enviando documento...");
+  // console.log("Enviando documento...");
 };
 </script>
 
