@@ -64,6 +64,9 @@ export const useDatabaseStore = defineStore( 'urls', {
       finally{
 
       }
+    },
+    async deleteUrl(id){
+      console.log('Eliminando...')
     }
     
   }

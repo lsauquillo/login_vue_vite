@@ -5,7 +5,8 @@ import RegisterView from '../views/RegisterView.vue'
 import { useUserStore } from '../stores/user'
 
 const requireAuth = async (to, from, next) => {
-  const userStore = useUserStore() // ojo! definir dentro del método
+  const userStore = useUserStore()
+  // ojo! definir dentro del método
   userStore.loadingSession = true
   const user = await userStore.currentUser()
   if (user) {

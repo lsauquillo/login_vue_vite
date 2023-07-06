@@ -16,6 +16,11 @@
   <ul>
     <li v-for="(item, index) in databaseStore.documents" :key="index">
       {{ item.name }}
+      <br>
+      {{ item.short }}
+      <br>
+      {{ item.user }}
+      <hr>
     </li>
   </ul>
 </template>
