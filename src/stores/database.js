@@ -3,10 +3,16 @@ import { query,
         collection, 
         getDocs,
         doc,
-        addDoc, 
-        where} from 'firebase/firestore/lite'
+        addDoc,
+        deleteDoc,
+        getDoc,
+        where,
+        updateDoc} from 'firebase/firestore/lite'
 import {db, auth} from '../firebaseConfig'
 import { nanoid } from 'nanoid'
+import router from '../router'
+
+
 
 export const useDatabaseStore = defineStore( 'urls', {
   state: ()=>({
@@ -62,11 +68,51 @@ export const useDatabaseStore = defineStore( 'urls', {
         console.log(err)
       }
       finally{
-
       }
     },
+
+    async leerUrl(id){
+      try{
+        const docRef = doc( db, 'urls', id)       
+        const docSnap = await getDoc( docRef)  
+        // console.log( docSnap.data().name)
+        return docSnap.data().name
+      }
+      catch(err){
+        console.log(err)
+      }
+
+    },
+
     async deleteUrl(id){
-      console.log('Eliminando...')
+      try{
+        const docRef = doc( db, 'urls', id)
+        await deleteDoc(docRef);
+        console.log('Eliminado de la db') 
+        // lo eliminamos del store
+        this.documents = this.documents.filter( item => item.id != id)         
+      }
+      catch(err){
+        console.log(err)
+      }
+      finally{
+      }
+    },
+    async updateUrl(id, name){
+      try{
+        const docRef = doc( db, 'urls', id)
+        await updateDoc( docRef, {name: name}) 
+        console.log('Actualizado en la db') 
+        // actualizamos tambien el store
+        this.documents = this.documents.map( item => item.id == id ? ({...item, name: name}) : item) 
+        router.push('/')
+        // router.push('/')
+      }
+      catch(err){
+        console.log(err)
+      }
+      finally{        
+      }
     }
     
   }
